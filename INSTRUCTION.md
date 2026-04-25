@@ -252,36 +252,10 @@
   - Euria
   - Lumo
   - Autre
-- Quel plan
-  - ChatGPT
-    - Free
-    - Plus / Go
-    - Pro
-    - Team / Business
-  - Claude
-    - Free
-    - Pro
-    - Team
-  - Gemini
-    - Free
-    - Advanced (Google One AI Premium)
-  - Mistral
-    - Free
-    - Pro
-    - Enterprise
-  - Perplexity
-    - Free
-    - Pro
-  - Grok
-    - Inclus X Premium
-    - X Premium+
-  - DeepSeek
-    - Free
-    - API payante
-  - Lumo
-    - Free
-    - Plus
-  - Autre
+- Version utilisée
+  - Gratuite
+  - Payante (Pro)
+  - Entreprise
 - Fréquence d'utilisation
   - Occasionnelle (quelques fois / mois)
   - Régulière (quelques fois / semaine)
@@ -313,36 +287,10 @@
   - Gemini (image)
   - Grok (image)
   - Autre
-- Quel plan
-  - ChatGPT (DALL·E)
-    - Free
-    - Plus / Go
-    - Pro
-    - Team / Business
-  - Midjourney
-    - Basic
-    - Standard
-    - Pro
-    - Mega
-  - Stable Diffusion
-    - Local (gratuit)
-    - API payante
-  - Adobe Firefly
-    - Inclus Adobe CC
-    - Crédit Firefly premium
-  - Leonardo AI
-    - Free
-    - Pro
-  - Playground AI
-    - Free
-    - Pro
-  - Grok
-    - Inclus X Premium
-    - X Premium+
-  - Gemini
-    - Free
-    - Advanced (Google One AI Premium)
-  - Autre
+- Version utilisée
+  - Gratuite
+  - Payante (Pro)
+  - Entreprise
 - Fréquence d'utilisation
   - Occasionnelle (quelques fois / mois)
   - Régulière (quelques fois / semaine)
@@ -372,23 +320,10 @@
   - Stable Video Diffusion
   - Kaiber
   - Autre
-- Quel plan
-  - Sora / ChatGPT
-    - Plus / Go
-    - Pro
-    - Enterprise
-  - Runway
-    - Free
-    - Standard
-    - Pro
-    - Unlimited
-  - Pika
-    - Free
-    - Pro
-  - Kaiber
-    - Free
-    - Pro
-  - Autre
+- Version utilisée
+  - Gratuite
+  - Payante (Pro)
+  - Entreprise
 - Fréquence d'utilisation
   - Occasionnelle (quelques fois / mois)
   - Régulière (quelques fois / semaine)
@@ -413,27 +348,10 @@
   - PlayHT
   - Descript
   - Autre
-- Quel plan
-  - Suno
-    - Free
-    - Pro
-    - Premier
-  - ElevenLabs
-    - Free
-    - Starter
-    - Creator
-    - Pro
-  - Udio
-    - Free
-    - Pro
-  - PlayHT
-    - Free
-    - Pro
-  - Descript
-    - Free
-    - Creator
-    - Pro
-  - Autre
+- Version utilisée
+  - Gratuite
+  - Payante (Pro)
+  - Entreprise
 - Fréquence d'utilisation
   - Occasionnelle (quelques fois / mois)
   - Régulière (quelques fois / semaine)
@@ -455,30 +373,10 @@
   - Cursor
   - Replit Ghostwriter
   - Autre
-- Quel plan
-  - GitHub Copilot
-    - Free (étudiant)
-    - Individual
-    - Business
-  - ChatGPT
-    - Free
-    - Plus / Go
-    - Pro
-    - Team / Business
-  - Claude
-    - Free
-    - Pro
-  - Codeium
-    - Free
-    - Pro
-  - Cursor
-    - Free
-    - Pro
-  - Replit
-    - Free
-    - Core
-    - Teams
-  - Autre
+- Version utilisée
+  - Gratuite
+  - Payante (Pro)
+  - Entreprise
 - Type d’usage
   - Suggestions simples
   - Génération complète
@@ -498,7 +396,7 @@
 
 ---
 
-# Calcul
+# Calcul [A VERIFIER + SOURCES]
 
 Le modèle combine :
 - Énergie terminal (Wh)
@@ -506,6 +404,7 @@ Le modèle combine :
 - Énergie data center
 - Type de modèle IA (proxy via usage)
 - Mix électrique du pays
+- [????????] la consommation de l'entrainement des modèles (les données données par l'utilisateur sont utilisées pour entraîner des modèles)
 
 ## Concepts clés
 - Analyse du cycle de vie (ACV)
@@ -534,29 +433,45 @@ Ereseau = Data × EIreseau
 
 Edata = Nreq × Epar_requete  
 
-Pour le texte :  
-- 0.001 – 0.1 kWh / requête  
-
-Pour les images :  
-Eimage = Nimages × Epar_image  
-- ≈ 0.01 – 0.05 kWh / image  
-
-Pour la vidéo :  
-Evideo = duree × facteur_modele  
-
-### Intensité carbone
-- France : ~0.05 kgCO₂e/kWh  
-- Europe : ~0.2–0.4  
-- Monde : ~0.5+  
-
 ---
 
 # Empreinte eau
 
-Eau = Énergie × WI  
+Eau = (Eterminal + Ereseau + Edata) × WI  
 
 - WI = intensité hydrique (L/kWh)  
 - Ordres de grandeur : 1 à 10 L/kWh  
+
+---
+
+# Données
+
+## Intensité carbone
+Source : https://analysesetdonnees.rte-france.com/bilan-electrique-2025/emissions#Vuedensemble
+- CI_france : 19,6 gCO2éq/kWh
+- CI_Europe : 178 gCO2éq/kWh
+
+## Energie par requête [A VERIFIER / CHANGER]
+
+### Texte
+| Modèle      | Courte (1 phrase) | Moyenne (paragraphe) | Longue (document) | Sources principales |
+|------------|------------------|----------------------|-------------------|---------------------|
+| ChatGPT    | 0,02–0,08 Wh     | 0,3–0,4 Wh           | 2–4 Wh            | [Epoch AI – GPT-4o energy](https://epoch.ai), [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241), [ByteThirst methodology](https://www.bytethirst.com/methodology.html) |
+| Claude     | 0,02–0,07 Wh     | 0,2–0,4 Wh           | 1–3 Wh            | [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241), [ByteThirst methodology](https://www.bytethirst.com/methodology.html) |
+| Gemini     | 0,02–0,06 Wh     | ~0,24 Wh             | 1–2 Wh            | [ByteThirst – Google estimate](https://www.bytethirst.com/methodology.html) |
+| Mistral    | 0,01–0,05 Wh     | 0,1–0,3 Wh           | 0,5–2 Wh          | [Kaplan et al. – Scaling Laws](https://arxiv.org/abs/2001.08361), [Hoffmann et al. – Chinchilla](https://arxiv.org/abs/2203.15556) |
+| DeepSeek   | 0,03–0,1 Wh      | 0,3–0,6 Wh           | 2–5 Wh            | [Nature Scientific Reports – Reasoning tokens impact](https://www.nature.com/articles/s41598-026-45023-0) |
+| Grok       | 0,03–0,1 Wh      | 0,3–0,6 Wh           | 2–4 Wh            | [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241) |
+| Perplexity | 0,05–0,15 Wh     | 0,4–1 Wh             | 2–5 Wh            | [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241), [ByteThirst methodology](https://www.bytethirst.com/methodology.html) |
+| Kimi       | 0,02–0,08 Wh     | 0,1–0,4 Wh           | 1–3 Wh            | [Switch Transformer (MoE)](https://arxiv.org/abs/2101.03961), [GShard (MoE)](https://arxiv.org/abs/2006.16668) |
+| Euria      | ~0,02–0,1 Wh     | 0,2–0,5 Wh           | 1–3 Wh            | Estimation basée sur [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241) |
+| Lumo       | ~0,02–0,1 Wh     | 0,2–0,5 Wh           | 1–3 Wh            | Estimation basée sur [arXiv – Energy consumption of LLM inference](https://arxiv.org/abs/2509.20241) |
+
+### Image
+
+### Vidéo
+
+### Code
 
 ---
 
@@ -577,21 +492,21 @@ Eau = Énergie × WI
 - g / kg de viande rouge consommée
 - nombre de piscines
 - nombre de douches
+- part de l'IA sur l'empreinte total
+- part de l'IA sur la consommation totale d'eau
 
 ## Recommandations
 - Conseils personnalisés pour réduire l’empreinte
 
 ---
 
-# Données
-
-## Co
-
 # Idées d'ajout
 
 - Affichage du nombre de personne ayant rempli le questionnaire
 - Positionnement de l'utilisateur par rapport à la moyenne des répondants au questionnaire / à la moyenne des gens de sa catégorie
+- Si toute la planète à la même consommation que toi, on atteindrait ... de bilan carbone / litre
 - Add-on pour suivre sa consommation
 - Partager son résultat sur les réseaux
 - Inviter un ami
 - Soumettre un problème / une recommandation
+- Donation : financer le site / donner à une association
