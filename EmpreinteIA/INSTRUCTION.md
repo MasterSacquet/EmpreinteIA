@@ -510,3 +510,4 @@ Source : https://analysesetdonnees.rte-france.com/bilan-electrique-2025/emission
 - Inviter un ami
 - Soumettre un problème / une recommandation
 - Donation : financer le site / donner à une association
+- site épuré avec des "le saviez vous ?" etc...
