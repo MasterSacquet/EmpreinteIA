@@ -1,5 +1,5 @@
 export const questions = [
-  // Initial choice
+  // Initial choice - keep mode selection to allow access to detailed
   {
     id: "mode",
     question: "Quel mode d'analyse préférez-vous ?",
@@ -7,30 +7,24 @@ export const questions = [
     type: "single"
   },
 
-  // ========== COMMON TO BOTH MODES ==========
+  // ========== RAPID MODE ONLY - SECTION 2: PROFIL UTILISATEUR ==========
   {
     id: "country",
     question: "Pays d'utilisation",
     choices: ["France", "Belgique", "Suisse"],
     type: "single",
-    showIn: "all"
-  },
-  {
-    id: "device",
-    question: "Appareil principal",
-    choices: ["Smartphone", "Ordinateur portable", "Ordinateur fixe", "Tablette"],
-    type: "single",
-    showIn: "all"
+    showIn: "rapid"
   },
   
-  // User type with subcategories (RAPID MODE)
   {
     id: "userType",
     question: "Type d'utilisateur",
     choices: ["Particulier", "Étudiant", "Professionnel", "Entreprise"],
     type: "single",
-    showIn: "all"
+    showIn: "rapid"
   },
+  
+  // Professional subcategories
   {
     id: "professionalSubType",
     question: "Domaine professionnel",
@@ -40,6 +34,8 @@ export const questions = [
     dependsOn: "userType",
     dependsOnValue: "Professionnel"
   },
+  
+  // Enterprise size
   {
     id: "enterpriseSize",
     question: "Taille de l'entreprise",
@@ -49,6 +45,8 @@ export const questions = [
     dependsOn: "userType",
     dependsOnValue: "Entreprise"
   },
+  
+  // Enterprise sector
   {
     id: "enterpriseSector",
     question: "Secteur d'activité",
@@ -56,182 +54,193 @@ export const questions = [
     type: "single",
     showIn: "rapid",
     dependsOn: "enterpriseSize",
-    dependsOnValue: null // Always show if enterprise
+    dependsOnValue: null
   },
 
-  // Network connection (RAPID MODE)
+  // ========== RAPID MODE ONLY - SECTION 3: APPAREIL ET USAGE ==========
   {
-    id: "networkType",
-    question: "Type de connexion",
-    choices: ["Wi-Fi", "Données mobiles (4G)", "Données mobiles (5G)"],
+    id: "device",
+    question: "Appareil principal",
+    choices: ["Smartphone", "Ordinateur portable", "Ordinateur fixe", "Tablette"],
     type: "single",
     showIn: "rapid"
   },
 
-  // ========== AI TYPES (both modes) ==========
+  // ========== RAPID MODE ONLY - SECTION 4: TYPES D'IA UTILISÉS ==========
   {
     id: "aiTypes",
     question: "Quels types d'IA utilisez-vous ? (sélectionnez tout ce qui s'applique)",
-    choices: ["Texte (chatbot)", "Images", "Vidéo", "Audio/Musique", "Code"],
+    choices: ["Texte (chatbot)", "Génération d'images", "Génération vidéo", "Audio / musique", "Code"],
     type: "multiple",
-    showIn: "all"
+    showIn: "rapid"
   },
 
-  // ========== TEXT AI QUESTIONS (both modes) ==========
+  // ========== TEXT AI - RAPID MODE ==========
   {
     id: "textModel",
     question: "Quel modèle de texte utilisez-vous ?",
     choices: ["ChatGPT", "Claude", "Mistral", "Gemini", "Deepseek", "Grok", "Perplexity", "Kimi", "Euria", "Lumo", "Autre"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Texte (chatbot)"
   },
+  
   {
     id: "textRequests",
     question: "Nombre de requêtes par session",
     choices: ["1–5", "5–20", "20–50", "50+"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Texte (chatbot)"
   },
+  
   {
     id: "textLength",
     question: "Longueur des requêtes",
     choices: ["Courtes (1 phrase)", "Moyennes (paragraphe)", "Longues (documents)"],
     type: "single",
-    showIn: "all",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Texte (chatbot)"
-  },
-  {
-    id: "textResponses",
-    question: "Type de réponses",
-    choices: ["Courtes", "Longues", "Analyse de documents"],
-    type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Texte (chatbot)"
   },
 
-  // ========== IMAGE AI QUESTIONS (both modes) ==========
+  // ========== IMAGE AI - RAPID MODE ==========
   {
     id: "imageModel",
     question: "Quel modèle de génération d'images utilisez-vous ?",
     choices: ["DALL·E (ChatGPT)", "Midjourney", "Stable Diffusion", "Adobe Firefly", "Leonardo AI", "Playground AI", "Gemini (image)", "Grok (image)", "Autre"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Images"
+    dependsOnValue: "Génération d'images"
   },
+  
   {
     id: "imageCount",
-    question: "Nombre d'images par session",
+    question: "Nombre de requêtes par session",
     choices: ["1–2", "3–10", "10–30", "30+"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Images"
+    dependsOnValue: "Génération d'images"
   },
+  
   {
     id: "imageResolution",
-    question: "Résolution des images",
-    choices: ["Faible (512px)", "Moyenne (1024px)", "Élevée (HD/4K)"],
+    question: "Résolution",
+    choices: ["Standard", "Haute définition", "Je ne sais pas"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Images"
-  },
-  {
-    id: "imageTries",
-    question: "Nombre de tentatives",
-    choices: ["1", "2–5", "5–10", "10+"],
-    type: "single",
-    showIn: "all",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Images"
+    dependsOnValue: "Génération d'images"
   },
 
-  // ========== VIDEO AI QUESTIONS (both modes) ==========
+  // ========== VIDEO AI - RAPID MODE ==========
   {
     id: "videoModel",
     question: "Quel modèle de génération de vidéo utilisez-vous ?",
-    choices: ["Sora (OpenAI)", "Runway (Gen-2/Gen-3)", "Pika", "Stable Video Diffusion", "Kaiber", "Autre"],
+    choices: ["Sora (OpenAI)", "Runway (Gen-2 / Gen-3)", "Pika", "Stable Video Diffusion", "Kaiber", "Autre"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Vidéo"
+    dependsOnValue: "Génération vidéo"
   },
+  
+  {
+    id: "videoCount",
+    question: "Nombre de requêtes par session",
+    choices: ["1–2", "3–10", "10–30", "30+"],
+    type: "single",
+    showIn: "rapid",
+    dependsOn: "aiTypes",
+    dependsOnValue: "Génération vidéo"
+  },
+  
   {
     id: "videoDuration",
-    question: "Durée moyenne des vidéos",
+    question: "Durée moyenne d'une vidéo",
     choices: ["< 10 sec", "10–30 sec", "30–60 sec", "> 1 min"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Vidéo"
+    dependsOnValue: "Génération vidéo"
   },
+  
   {
     id: "videoResolution",
-    question: "Résolution des vidéos",
-    choices: ["SD", "HD", "4K+"],
+    question: "Résolution",
+    choices: ["Standard", "Haut définition"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Vidéo"
+    dependsOnValue: "Génération vidéo"
   },
 
-  // ========== AUDIO AI QUESTIONS (both modes) ==========
+  // ========== AUDIO AI - RAPID MODE ==========
   {
     id: "audioModel",
     question: "Quel modèle audio/musique utilisez-vous ?",
     choices: ["Suno", "ElevenLabs", "Udio", "PlayHT", "Descript", "Autre"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Audio/Musique"
+    dependsOnValue: "Audio / musique"
   },
+  
+  {
+    id: "audioCount",
+    question: "Nombre de requêtes par session",
+    choices: ["1–2", "3–10", "10–30", "30+"],
+    type: "single",
+    showIn: "rapid",
+    dependsOn: "aiTypes",
+    dependsOnValue: "Audio / musique"
+  },
+  
   {
     id: "audioDuration",
-    question: "Durée moyenne du contenu audio",
+    question: "Durée moyenne d'un audio",
     choices: ["< 30 sec", "30 sec – 2 min", "2–5 min", "> 5 min"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
-    dependsOnValue: "Audio/Musique"
+    dependsOnValue: "Audio / musique"
   },
 
-  // ========== CODE AI QUESTIONS (both modes) ==========
+  // ========== CODE AI - RAPID MODE ==========
   {
     id: "codeModel",
     question: "Quel modèle de code utilisez-vous ?",
     choices: ["GitHub Copilot", "ChatGPT", "Claude", "Codeium", "Cursor", "Replit Ghostwriter", "Autre"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Code"
   },
+  
   {
     id: "codeUsage",
-    question: "Type d'usage du code",
+    question: "Type d'usage",
     choices: ["Suggestions simples", "Génération complète", "Debug / correction"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Code"
   },
+  
   {
     id: "codeTime",
-    question: "Temps d'utilisation quotidien",
+    question: "Temps d'utilisation",
     choices: ["< 30 min", "30 min – 2 h", "2–5 h", "5 h+"],
     type: "single",
-    showIn: "all",
+    showIn: "rapid",
     dependsOn: "aiTypes",
     dependsOnValue: "Code"
   },
 
-  // ========== VERSION AND FREQUENCY (RAPID MODE) ==========
+  // ========== SECTION 5: VERSION AND FREQUENCY (RAPID MODE) ==========
   {
     id: "version",
     question: "Version utilisée",
@@ -239,6 +248,7 @@ export const questions = [
     type: "single",
     showIn: "rapid"
   },
+  
   {
     id: "rapidFrequency",
     question: "Fréquence d'utilisation de l'IA",
@@ -247,86 +257,15 @@ export const questions = [
     showIn: "rapid"
   },
 
-  // ========== DETAILED MODE ONLY ==========
+  // ========== SECTION 6: CONNEXION RÉSEAU (RAPID MODE) ==========
   {
-    id: "textVersion",
-    question: "Version utilisée (Texte)",
-    choices: ["Gratuite", "Payante (Pro)", "Entreprise"],
+    id: "networkType",
+    question: "Type de connexion",
+    choices: ["Wi-Fi", "Données mobiles (4G, 5G)"],
     type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Texte (chatbot)"
+    showIn: "rapid"
   },
-  {
-    id: "textFrequency",
-    question: "Fréquence d'utilisation (Texte)",
-    choices: ["Occasionnelle (quelques fois/mois)", "Régulière (quelques fois/semaine)", "Intensive (quotidienne)"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Texte (chatbot)"
-  },
-  {
-    id: "imageVersion",
-    question: "Version utilisée (Images)",
-    choices: ["Gratuite", "Payante (Pro)", "Entreprise"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Images"
-  },
-  {
-    id: "imageFrequency",
-    question: "Fréquence d'utilisation (Images)",
-    choices: ["Occasionnelle (quelques fois/mois)", "Régulière (quelques fois/semaine)", "Intensive (quotidienne)"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Images"
-  },
-  {
-    id: "videoVersion",
-    question: "Version utilisée (Vidéo)",
-    choices: ["Gratuite", "Payante (Pro)", "Entreprise"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Vidéo"
-  },
-  {
-    id: "videoFrequency",
-    question: "Fréquence d'utilisation (Vidéo)",
-    choices: ["Occasionnelle (quelques fois/mois)", "Régulière (quelques fois/semaine)", "Intensive (quotidienne)"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Vidéo"
-  },
-  {
-    id: "audioVersion",
-    question: "Version utilisée (Audio)",
-    choices: ["Gratuite", "Payante (Pro)", "Entreprise"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Audio/Musique"
-  },
-  {
-    id: "audioFrequency",
-    question: "Fréquence d'utilisation (Audio)",
-    choices: ["Occasionnelle (quelques fois/mois)", "Régulière (quelques fois/semaine)", "Intensive (quotidienne)"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Audio/Musique"
-  },
-  {
-    id: "codeVersion",
-    question: "Version utilisée (Code)",
-    choices: ["Gratuite", "Payante (Pro)", "Entreprise"],
-    type: "single",
-    showIn: "detailed",
-    dependsOn: "aiTypes",
-    dependsOnValue: "Code"
-  }
+
+  // ========== DETAILED MODE QUESTIONS (placeholder for future development) ==========
+  // Detailed mode questions would go here but are not included in current rapid-only implementation
 ];

@@ -10,8 +10,8 @@ export default function Quiz({ onComplete }) {
     const mode = answers.mode;
     return questions.filter((q) => {
       // Always show questions without showIn
-      if (!q.showIn || q.showIn === "all") {
-        // Check dependencies for "all" questions
+      if (!q.showIn) {
+        // Check dependencies for questions without showIn
         if (q.dependsOn && q.dependsOnValue) {
           const dependValue = answers[q.dependsOn];
           if (Array.isArray(dependValue)) {
@@ -38,16 +38,10 @@ export default function Quiz({ onComplete }) {
         return true;
       }
 
-      // Show detailed-specific questions if in Détaillé mode
+      // For detailed mode, show message
       if (q.showIn === "detailed" && mode === "Détaillé") {
-        if (q.dependsOn && q.dependsOnValue) {
-          const dependValue = answers[q.dependsOn];
-          if (Array.isArray(dependValue)) {
-            return dependValue.includes(q.dependsOnValue);
-          }
-          return dependValue === q.dependsOnValue;
-        }
-        return true;
+        // Would handle detailed mode here in future
+        return false;
       }
 
       return false;
@@ -56,6 +50,37 @@ export default function Quiz({ onComplete }) {
 
   const visibleQuestions = getVisibleQuestions();
   const currentQuestion = visibleQuestions[currentIndex];
+
+  // Handle Detailed mode - show coming soon message
+  if (answers.mode === "Détaillé" && !currentQuestion) {
+    return (
+      <>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4">📊 Mode Détaillé</h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Le mode détaillé avec analyse approfondie par type d'IA sera bientôt disponible.
+          </p>
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+            <p className="text-blue-900">
+              ✨ Cette version permettra une analyse plus granulaire de votre utilisation d'IA avec des résultats personnalisés par type de service.
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex gap-3">
+          <button
+            onClick={() => {
+              setCurrentIndex(0);
+              setAnswers({});
+            }}
+            className="flex-1 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 font-semibold"
+          >
+            ← Retour au mode Rapide
+          </button>
+        </div>
+      </>
+    );
+  }
 
   if (!currentQuestion) {
     return <div>Erreur : question non trouvée</div>;

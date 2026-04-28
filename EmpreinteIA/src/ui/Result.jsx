@@ -10,6 +10,32 @@ export default function Result({ data, result, setResult, onRestart }) {
 
   if (!result) return null;
 
+  // Handle detailed mode message
+  if (result.level === "detailed") {
+    return (
+      <>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4">📊 Mode Détaillé</h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Le mode détaillé sera disponible prochainement pour une analyse plus complète.
+          </p>
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+            <p className="text-blue-900">
+              Utilisez le mode rapide pour découvrir votre empreinte carbone IA dès maintenant !
+            </p>
+          </div>
+        </div>
+        
+        <button
+          onClick={onRestart}
+          className="w-full py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 font-semibold"
+        >
+          ← Retour à l'accueil
+        </button>
+      </>
+    );
+  }
+
   const co2Value = parseFloat(result.co2);
   const recommendations =
     result.level === "high"
@@ -112,14 +138,17 @@ export default function Result({ data, result, setResult, onRestart }) {
           <div>
             <p className="text-gray-600">Fréquence</p>
             <p className="font-semibold">
-              {data.frequency?.split("(")[0].trim() || "Non spécifiée"}
+              {data.rapidFrequency 
+                ? data.rapidFrequency.split("(")[0].trim()
+                : data.frequency?.split("(")[0].trim() || "Non spécifiée"
+              }
             </p>
           </div>
         </div>
       </div>
 
       {/* Action buttons */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 mb-3">
         <button
           onClick={onRestart}
           className="flex-1 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 font-semibold"
@@ -135,6 +164,16 @@ export default function Result({ data, result, setResult, onRestart }) {
           className="flex-1 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 font-semibold"
         >
           Partager
+        </button>
+      </div>
+
+      {/* Button to access detailed mode */}
+      <div className="mb-3">
+        <button
+          onClick={onRestart}
+          className="w-full py-3 border-2 border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 font-semibold transition"
+        >
+          📊 Essayer le mode détaillé
         </button>
       </div>
 
