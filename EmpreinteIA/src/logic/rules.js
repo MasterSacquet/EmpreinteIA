@@ -235,11 +235,22 @@ export const rules = {
     ]
   },
 
-  // ========== PEDAGOGICAL EQUIVALENTS ==========
+  // ========== PEDAGOGICAL EQUIVALENTS FOR CARBON ==========
   equivalents: {
-    "km_car_100km": 8.2,           // gCO2 per km of car
-    "flight_paris_london": 255,    // gCO2 per person
+    "km_car_per_km": 93,           // gCO2 per km of car
+    "flight_paris_london": 63000,    // gCO2 per person
     "tree_co2_per_year": 25000,    // gCO2 per year absorbed by a tree
-    "planet_fair_share": 5000,     // gCO2 per year for sustainability
+    "planet_fair_share": 2000000,     // gCO2 per year for sustainability
+  },
+
+  // ========== WATER EQUIVALENTS ==========
+  // Used for calculating water consumption in liters and showing pedagogical equivalents
+  waterEquivalents: {
+    "shower_liters": 60,           // Litres for one shower (typical: 50-100L)
+    "bath_liters": 200,            // Litres for one bath (typical: 150-300L)
+    "water_bottle_liters": 0.5,    // Litres per bottle (500ml)
+    "daily_consumption_liters": 2, // Daily human water consumption (L)
+    "swimming_pool_small_liters": 25000,    // Small swimming pool (25,000L)
+    "olympic_pool_liters": 2500000,         // Olympic pool (2,500,000L)
   }
 };

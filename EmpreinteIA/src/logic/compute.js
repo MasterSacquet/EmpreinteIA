@@ -175,6 +175,11 @@ export function computeFootprint(data) {
   // === Calculate CO2 emissions ===
   const co2PerMonthKg = totalEnergyMonthKwh * ci; // kgCO2e
 
+  // === Calculate water consumption (Eau = totalEnergy × WI) ===
+  // WI = water intensity in L/kWh
+  const waterIntensity = rules.waterIntensity[data.country] || 0.87; // L/kWh
+  const waterPerMonthLiters = totalEnergyMonthKwh * waterIntensity; // Litres
+
   // === Determine label ===
   let label = "Faible 🌱";
   if (co2PerMonthKg > 10) label = "Élevé 🔥";
@@ -183,6 +188,7 @@ export function computeFootprint(data) {
   return {
     co2: co2PerMonthKg.toFixed(2),
     energy: (totalEnergyMonthKwh * 1000).toFixed(2), // Convert back to Wh for display
+    water: waterPerMonthLiters.toFixed(2), // Water consumption in litres
     label,
     level: co2PerMonthKg > 10 ? "high" : co2PerMonthKg > 5 ? "moderate" : "low",
     // Additional details for debugging/breakdown

@@ -589,6 +589,13 @@ Eau = (Eterminal + Ereseau + Edata) × WI
    - Standard : 0.45 GB/requête/minute
    - Haute définition : 1.2 GB/requête/minute
 
+## Equivalents concrets
+
+- gCO2 par km de voiture : 93 gCO2/km (https://carlabelling.ademe.fr/chiffrescles/r/evolutionTauxCo2)
+- gCO2 par personne pour un vol Paris-Londres : 63 000 gCO2/personne (https://impactco2.fr/outils/transport/avion-moyencourrier)
+- gCO2 moyen absorbé par an par un arbre : 25 000 gCO2/arbre/an (https://www.takeair.fr/blog/agriculture/absorption-co2-arbre/)
+- gCO2 cible par personne par an pour l'objectif de la GIEC (+1.5°C) : 2 000 000 gCO2/an/personne
+
 ---
 
 # Résultats
